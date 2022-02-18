@@ -1,12 +1,16 @@
-candidates,target=[2,3,5],8
-ans=[]
-def find(candidates,target,comb):
-    if target==0:
-        ans.append(comb)
-    if len(candidates)==0:
-        return None
-    find(candidates[:-1],target,comb)
-    if target>=candidates[-1]:
-        find(candidates,target-candidates[-1],comb+[candidates[-1]])
-find(candidates,target,[])
+nums=[10,5,2,6]
+k=100
+n=len(nums)
+val=1
+ans=0
+i,j=0,0
+while j<n:
+    while j<n and val*nums[j]<k:
+        ans+=1
+        val*=nums[j]
+        j+=1
+    while val>k and i<j:
+        val//=nums[i]
+        i+=1
+
 print(ans)
