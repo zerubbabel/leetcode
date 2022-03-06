@@ -5,20 +5,21 @@
 #
 
 # @lc code=start
+from operator import le
+
+
 class Solution:
     def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
         n=len(nums)
-        val=1
         ans=0
-        i,j=0,0
-        while j<n:
-            while j<n and val*nums[j]<k:
-                ans+=1
-                val*=nums[j]
-                j+=1
-            
-            val//=nums[i]
-            i+=1
+        val,left=1,0
+        for right in range(n):
+            val*=nums[right]
+            while val>=k and left<right:
+                val//=nums[left]
+                left+=1
+            if val<k:ans+=right-left+1
         return ans
+
 # @lc code=end
 
